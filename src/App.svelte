@@ -8,10 +8,6 @@ import H5 from './H5.svelte';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-:global(body) {
-	padding: 0;
-}
-
 .to-form {
 	background: linear-gradient(to right, red, purple);
 }
