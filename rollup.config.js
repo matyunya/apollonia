@@ -2,8 +2,15 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
+import getPreprocessor from 'svelte-preprocess';
 
 const production = !process.env.ROLLUP_WATCH;
+
+const preprocess = getPreprocessor({
+	transformers: {
+		postcss: true
+	}
+});
 
 export default {
 	input: 'src/main.js',
@@ -16,11 +23,12 @@ export default {
 	plugins: [
 		svelte({
 			// opt in to v3 behaviour today
-			skipIntroByDefault: true,
-			nestedTransitions: true,
+			// skipIntroByDefault: true,
+			// nestedTransitions: true,
 
 			// enable run-time checks when not in production
 			dev: !production,
+			preprocess,
 			// we'll extract any component CSS out into
 			// a separate file — better for performance
 			css: css => {
